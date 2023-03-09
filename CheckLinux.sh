@@ -10,7 +10,7 @@ echo "CPU架构：$cpu_architecture"
 
 #物理CPU个数
 cpu_phy_num=`cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l`
-echo "$物理CPU个数：cpu_phy_num"
+echo "物理CPU个数：$cpu_phy_num"
 
 #CPU核数
 cpu_core_num=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk -F ': ' '{print $2}'`
@@ -18,15 +18,15 @@ echo "CPU核数：$cpu_core_num"
 
 #逻辑CPU个数
 cpu_proc_num=`cat /proc/cpuinfo | grep "processor" | uniq | wc -l`
-echo "$逻辑CPU个数：cpu_proc_num"
+echo "逻辑CPU个数：$cpu_proc_num"
 
 ##CPU主频
 cpu_main_freq=`cat /proc/cpuinfo | grep "model name" | awk -F '@' 'NR==1 {print $2}'`
-echo "$CPU主频：cpu_main_freq"
+echo "CPU主频：$cpu_main_freq"
 
 ##L1d缓存
 cpu_l1d_cache=`lscpu | grep -i 'L1d 缓存\|L1d cache' | awk -F '：|:' '{print $2}'`
-echo "$L1d缓存：cpu_l1d_cache"
+echo "L1d缓存：$cpu_l1d_cache"
 
 ##L1i缓存
 cpu_l1i_cache=`lscpu | grep -i 'L1i 缓存\|L1i cache' | awk -F '：|:' '{print $2}'`
