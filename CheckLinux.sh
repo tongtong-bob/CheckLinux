@@ -26,19 +26,19 @@ echo "CPU主频：$cpu_main_freq"
 
 ##L1d缓存
 cpu_l1d_cache=`lscpu | grep -i 'L1d 缓存\|L1d cache' | awk -F '：|:' '{print $2}'`
-echo "L1d缓存：$cpu_l1d_cache"
+echo "L1d缓存：$cpu_-l1d_cache"
 
 ##L1i缓存
 cpu_l1i_cache=`lscpu | grep -i 'L1i 缓存\|L1i cache' | awk -F '：|:' '{print $2}'`
-echo "L1i缓存：$cpu_l1i_cache"
+echo "L1i缓存：$cpu_-l1i_cache"
 
 ##L2缓存
 cpu_l2_cache=`lscpu | grep -i 'L2 缓存\|L2 cache' | awk -F '：|:' '{print $2}'`
-echo "L2缓存：$cpu_l2_cache"
+echo "L2缓存：$cpu_-l2_cache"
 
 ##L3缓存
 cpu_l3_cache=`lscpu | grep -i 'L3 缓存\|L3 cache' | awk -F '：|:' '{print $2}'`
-echo "L3缓存：$cpu_l3_cache"
+echo "L3缓存：$cpu_-l3_cache"
 
 #操作系统名称
 system_name=`head -n 1 /etc/issue | awk '{print $1,$2}'`
@@ -55,7 +55,7 @@ echo "操作系统内核版本：$system_kernel"
 
 #物理内存容量
 meminfo=`sudo dmidecode | grep "^[[:space:]]*Size.*MB$" | uniq -c | sed 's/ \t*Size: /\*/g' | sed 's/^ *//g'`
-echo "物理内存容量：$meminfo"
+echo "$meminfo"
 
 #单位转换函数
 function convert_unit()
@@ -77,44 +77,43 @@ function convert_unit()
 }
 
 #单位：KB
-echo "(单位：KB)内存总量"
+echo "--------------------------物理内存容量（单位：KB）-----------------------------------------"
 MemTotal=$(cat /proc/meminfo | awk '/^MemTotal/{print $2}') #内存总量
 MemFree=$(cat /proc/meminfo | awk '/^MemFree/{print $2}')   #空闲内存
 MemUsed=$(expr $MemTotal - $MemFree)  #已用内存
 
 ##计算内存占用率
-echo "计算内存占用率"
+
 Mem_Rate=$(awk 'BEGIN{printf"%.2f\n",'$MemUsed' / '$MemTotal' *100}') #保留小数点后2位
 
-echo "共享内存"
 MemShared=$(cat /proc/meminfo | awk '/^Shmem/{print $2}') #共享内存
-echo "文件缓冲区"
+
 Buffers=$(cat /proc/meminfo | awk '/^Buffers/{print $2}') #文件缓冲区
-echo "用于高速缓冲存储器"
+
 Cached=$(cat /proc/meminfo | awk '/^Cached/{print $2}') #用于高速缓冲存储器
 
-echo "交换区总量"
+
 SwapTotal=$(cat /proc/meminfo | awk '/^SwapTotal/{print $2}') #交换区总量
-echo "空闲交换区"
+
 SwapFree=$(cat /proc/meminfo | awk '/^SwapFree/{print $2}') #空闲交换区
-echo "已映射"
+
 Mapped=$(cat /proc/meminfo | awk '/^Mapped/{print $2}') #已映射
 
 ##虚拟内存
-echo "虚拟内存"
+
 VmallocUsed=$(cat /proc/meminfo | awk '/^VmallocUsed/{print $2}') #已使用的虚拟内存
-echo "已使用的虚拟内存："
-echo "$(convert_unit $MemTotal)"
-echo "$(convert_unit $MemFree)"
-echo "$(convert_unit $MemUsed)"
-echo "$Mem_Rate%"
-echo "$(convert_unit $MemShared)"
-echo "$(convert_unit $Buffers)"
-echo "$(convert_unit $Cached)"
-echo "$(convert_unit $SwapTotal)"
-echo "$(convert_unit $SwapFree)"
-echo "$(convert_unit $Mapped)"
-echo "$(convert_unit $VmallocUsed)"
+
+echo "内存总量：$(convert_unit $MemTotal)"
+echo "空闲内存：$(convert_unit $MemFree)"
+echo "已用内存$(convert_unit $MemUsed)"
+echo "内存占用率：$Mem_Rate%"
+echo "共享内存：$(convert_unit $MemShared)"
+echo "文件缓冲区：$(convert_unit $Buffers)"
+echo "用于高速缓冲存储器：$(convert_unit $Cached)"
+echo "交换区总量：$(convert_unit $SwapTotal)"
+echo "空闲交换区：$(convert_unit $SwapFree)"
+echo "已映射：$(convert_unit $Mapped)"
+echo "已使用的虚拟内存：$(convert_unit $VmallocUsed)"
 
 
 #磁盘型号
@@ -132,8 +131,8 @@ do
 	totalsum=$[$totalsum+$pertotal]	#计算总量
 done
 freesum=$[$totalsum-$usesum]
-diskutil=$(awk 'BEGIN{printf"计算已使用的总量:%.2f\n",'$usesum' / '$totalsum'*100}')
-freeutil=$(awk 'BEGIN{printf"计算总量:%.2f\n",100 - '$diskutil'}')
+diskutil=$(awk 'BEGIN{printf"%.2f\n",'$usesum' / '$totalsum'*100}')
+freeutil=$(awk 'BEGIN{printf"%.2f\n",100 - '$diskutil'}')
 
 #磁盘总量
 if [ $totalsum -ge 0 -a $totalsum -lt 1024 ];then
