@@ -6,7 +6,7 @@ echo "CPU型号：$cpu_model"
 
 #CPU架构
 cpu_architecture=`uname -m`
-echo "$CPU架构：cpu_architecture"
+echo "CPU架构：$cpu_architecture"
 
 #物理CPU个数
 cpu_phy_num=`cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l`
