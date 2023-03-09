@@ -77,7 +77,7 @@ function convert_unit()
 }
 
 #单位：KB
-echo "--------------------------物理内存容量（单位：KB）信 息 -----------------------------------------"
+echo "-----------------------------物理内存容量（单位：KB）信 息 --------------------------------------"
 MemTotal=$(cat /proc/meminfo | awk '/^MemTotal/{print $2}') #内存总量
 MemFree=$(cat /proc/meminfo | awk '/^MemFree/{print $2}')   #空闲内存
 MemUsed=$(expr $MemTotal - $MemFree)  #已用内存
@@ -117,7 +117,7 @@ echo "已使用的虚拟内存：$(convert_unit $VmallocUsed)"
 
 
 #磁盘型号
-echo "----------------------------------- 磁 盘 -------------------------------------------------"
+echo "---------------------------------------- 磁 盘 --------------------------------------------------"
 disk_model=`fdisk -l | grep "Disk model" | awk -F : '{print $2}' | sed 's/^ //'`
 echo "磁盘型号:$disk_model"
 
