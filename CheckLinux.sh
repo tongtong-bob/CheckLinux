@@ -26,19 +26,19 @@ echo "CPU主频：$cpu_main_freq"
 
 ##L1d缓存
 cpu_l1d_cache=`lscpu | grep -i 'L1d 缓存\|L1d cache' | awk -F '：|:' '{print $2}'`
-echo "L1d缓存：$cpu_-l1d_cache"
+echo "L1d缓存：$cpu_l1d_cache"
 
 ##L1i缓存
 cpu_l1i_cache=`lscpu | grep -i 'L1i 缓存\|L1i cache' | awk -F '：|:' '{print $2}'`
-echo "L1i缓存：$cpu_-l1i_cache"
+echo "L1i缓存：$cpu_l1i_cache"
 
 ##L2缓存
 cpu_l2_cache=`lscpu | grep -i 'L2 缓存\|L2 cache' | awk -F '：|:' '{print $2}'`
-echo "L2缓存：$cpu_-l2_cache"
+echo "L2缓存：$cpu_l2_cache"
 
 ##L3缓存
 cpu_l3_cache=`lscpu | grep -i 'L3 缓存\|L3 cache' | awk -F '：|:' '{print $2}'`
-echo "L3缓存：$cpu_-l3_cache"
+echo "L3缓存：$cpu_l3_cache"
 
 #操作系统名称
 system_name=`head -n 1 /etc/issue | awk '{print $1,$2}'`
