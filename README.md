@@ -1,12 +1,12 @@
 # CheckLinux
 linux的基本属性脚本
 ———————————————————————————————————————————————————————————————
-#Windows加固
+# Windows加固
 ![image](https://github.com/zyh2580/CheckLinux/assets/89782304/0c6c67c0-a121-4569-989f-13606417ad6e)
 ![image](https://github.com/zyh2580/CheckLinux/assets/89782304/cbf73c13-3c23-42c0-9fa0-b91dda9b3d93)
 ![image](https://github.com/zyh2580/CheckLinux/assets/89782304/4847def9-074f-4cf2-844f-8769896fb958)
 ![image](https://github.com/zyh2580/CheckLinux/assets/89782304/96f48a4f-d51e-43f9-af10-755c39065532)
-#Linux加固
+# Linux加固
 ![image](https://github.com/zyh2580/CheckLinux/assets/89782304/c96b97e3-cba3-4389-9814-cc31d7a8bedb)
 ![image](https://github.com/zyh2580/CheckLinux/assets/89782304/7061ed37-65c0-4d15-b7c7-2535bd319ec3)
 ![image](https://github.com/zyh2580/CheckLinux/assets/89782304/257114f4-bc75-4eb7-bb40-dd5c59abdde9)
