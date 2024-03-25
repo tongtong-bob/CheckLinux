@@ -1,0 +1,50 @@
+两个网卡不需要设置网关vi /etc/sysconfig/network-script/ifcrg-eth0
+
+#编辑rt_tables
+echo "172 net_172 " >> /etc/iproute2/rt_tables
+echo "218 net_218 " >> /etc/iproute2/rt_tables
+
+#清空net_172路由表
+ip route flush table net_172
+# 添加一个路由规则到 net_172 表，这条规则是 net_172 这个路由表中数据包默认使用源 IP 172.16.109.17 通过 eth0 走网关 172.16.109.1
+ip route add default via 172.16.109.1 dev eth0 src 172.16.109.17 table net_172
+#来自 172.16.109.17 的数据包，使用 net_172 路由表的路由规则
+ip rule add from 172.16.109.17 table net_172
+
+#清空net_218路由表
+ip route flush table net_218
+#添加一个路由规则到 net_218 表，这条规则是 net_218 这个路由表中数据包默认使用源 IP 218.199.48.3 通过 eth1 走网关 218.199.48.1 
+ip route add default via 218.199.48.1 dev eth1 src 218.199.48.3 table net_218
+#来自 218.199.48.3 的数据包，使用 net_218 路由表的路由规则
+ip rule add from 218.199.48.3 table net_218
+
+#添加默认网关
+route add default gw 172.16.109.1
+
+#如果需要自启动生效可以写进配置文件也可以加入rc.local
+vi /etc/rc.local
+
+ip route flush table net_172
+ip route add default via 172.16.109.1 dev eth0 src 172.16.109.17 table net_172
+ip rule add from 172.16.109.17 table net_172
+
+ip route flush table net_218
+ip route add default via 218.199.48.1 dev eth1 src 218.199.48.3 table net_218
+ip rule add from 218.199.48.3 table net_218
+route add default gw 172.16.109.1
+
+#查看路由表
+route -n
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+169.254.0.0     0.0.0.0         255.255.0.0     U     1006   0        0 eth1
+169.254.0.0     0.0.0.0         255.255.0.0     U     1008   0        0 eth0
+169.254.0.0     0.0.0.0         255.255.0.0     U     1014   0        0 br-ex
+169.254.0.0     0.0.0.0         255.255.0.0     U     1015   0        0 br-int
+172.16.109.0    0.0.0.0         255.255.255.0   U     0      0        0 eth0
+218.199.48.0    0.0.0.0         255.255.253.0   U     0      0        0 eth1
+
+#在接入测试服务器上验证连通性
+ping 172.16.109.17
+ping 218.199.48.3
